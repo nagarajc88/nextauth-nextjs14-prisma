@@ -1,2 +1,1 @@
-# nextauth-nextjs14-prisma
-Next14
+Next auth demo 
