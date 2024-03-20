@@ -1,5 +1,7 @@
 "use client";
 
+import Footer from "@/components/footer";
+import Header from "@/components/header";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -17,6 +19,7 @@ export default function Profile() {
 
   return (
     <>
+    <Header />
       <section className="bg-ct-blue-600  min-h-screen pt-20">
         <div className="max-w-4xl mx-auto bg-ct-dark-100 rounded-md h-[20rem] flex justify-center items-center">
           <div>
@@ -45,6 +48,7 @@ export default function Profile() {
           </div>
         </div>
       </section>
+      <Footer />
     </>
   );
 }

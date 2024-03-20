@@ -7,11 +7,11 @@ const Header = async () => {
 
   const logoutAction = async () => {
     'use server';
-    await signOut();
+     await signOut();
   };
 
   return (
-    <header className='bg-white h-20'>
+    <header className='bg-white h-16'>
       <nav className='h-full flex justify-between container items-center'>
         <div>
           <Link href='/' className='text-ct-dark-600 text-2xl font-semibold'>
