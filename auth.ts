@@ -5,10 +5,10 @@ import github from 'next-auth/providers/github';
 import google from 'next-auth/providers/google';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import bcrypt from 'bcryptjs';
-
+import axios from 'axios';
+const API_END_POINT = process.env.SERVER_ENDPOINT || 'http://localhost'
 export const { handlers, auth, signIn, signOut } = NextAuth({
   session: { strategy: 'jwt' },
-  adapter: PrismaAdapter(prisma),
   pages: {
     signIn: '/login',
   },
@@ -30,20 +30,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         if (!credentials?.email || !credentials.password) {
           return null;
         }
-
-        const user = await prisma.user.findUnique({
-          where: {
-            email: String(credentials.email),
-          },
-        });
-
-        if (
-          !user ||
-          !(await bcrypt.compare(String(credentials.password), user.password!))
-        ) {
+        const res = await axios.post(`${API_END_POINT}/api/login`,  {email: credentials.email, password: credentials.password });
+        const user = res.data.user;
+        if(!user) {
           return null;
         }
-
         return {
           id: user.id,
           email: user.email,
